@@ -24,3 +24,22 @@ async function getVideoSources() {
 
     videoOptionsMenu.popup();
 }
+
+async function selectSource(source) {
+    const constraints = {
+         audio: false,
+         video: {
+             mandatory: {
+             chromeMediaSource: 'desktop',
+             chromeMediaSourceId: source.id
+            }
+         }
+    };
+
+
+const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+videoElement.srcObject = stream;
+videoElement.play();
+
+}
